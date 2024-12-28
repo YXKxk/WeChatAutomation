@@ -94,7 +94,7 @@ WeChatAutomation/
 
 如果本项目对您有所帮助，不妨打赏一下 :)
 
-<img src="./assets/支付宝收钱.jpg" style="zoom:20%;" />	<img src="./assets/微信收钱.jpg" style="zoom:20%;" />
+<img src="./assets/支付宝收钱.jpg" style="zoom:20%;" /><img src="./assets/微信收钱.jpg" style="zoom:20%;" />
 
 
 #### 许可证
