@@ -72,7 +72,7 @@
 
 1. 环境准备
 
-   ​- configs/settngs中OPENAI_API_KEY = ""替换自己的 OpenAI API Key
+   - configs/settngs中OPENAI_API_KEY = ""替换自己的 OpenAI API Key
 
    - 安装 Python 3.8 或更高版本
      pip install openai PyQt5 uiautomation pyttsx3 tenacity
@@ -94,7 +94,7 @@
 
 如果本项目对您有所帮助，不妨打赏一下 :)
 
-    <img src="./assets/code.jpg" style="zoom:20%;" />
+<img src="./assets/收款.png" style="zoom:20%;" />
 
 
 #### 许可证
