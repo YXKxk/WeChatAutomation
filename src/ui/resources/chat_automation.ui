@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChatAutomationApp</class>
+ <widget class="QWidget" name="ChatAutomationApp">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>538</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>微信自动化助手</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>wechat.ico</normaloff>wechat.ico</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    QWidget {
+        font-family: &quot;Microsoft YaHei&quot;, &quot;Segoe UI&quot;, Arial;
+        font-size: 9pt;
+    }
+    QPushButton {
+        padding: 4px 12px;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        min-height: 24px;
+    }
+    QPushButton:hover {
+        background-color: #1976D2;
+    }
+    QPushButton:pressed {
+        background-color: #0D47A1;
+    }
+    QLineEdit, QTextEdit {
+        padding: 4px;
+        border: 1px solid #BDBDBD;
+        border-radius: 3px;
+        background-color: white;
+    }
+    QLineEdit:focus, QTextEdit:focus {
+        border: 1px solid #2196F3;
+    }
+    QTabWidget::pane {
+        border: 1px solid #BDBDBD;
+        border-radius: 3px;
+    }
+    QTabBar::tab {
+        padding: 6px 16px;
+        background-color: #F5F5F5;
+        border: 1px solid #BDBDBD;
+        border-bottom: none;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    QTabBar::tab:selected {
+        background-color: white;
+        border-bottom: none;
+    }
+    QProgressBar {
+        border: 1px solid #BDBDBD;
+        border-radius: 3px;
+        text-align: center;
+        max-height: 12px;
+    }
+    QProgressBar::chunk {
+        background-color: #2196F3;
+    }
+    QGroupBox {
+        font-weight: bold;
+        border: 1px solid #BDBDBD;
+        border-radius: 3px;
+        margin-top: 6px;
+        padding-top: 6px;
+    }
+    QGroupBox::title {
+        subcontrol-origin: margin;
+        left: 8px;
+        padding: 0 3px;
+    }
+    QSpinBox {
+        padding: 3px;
+        border: 1px solid #BDBDBD;
+        border-radius: 3px;
+    }
+    QTimeEdit {
+        padding: 3px;
+        border: 1px solid #BDBDBD;
+        border-radius: 3px;
+    }
+    /* Light Theme Status Labels */
+    QLabel[objectName*="status_"] {
+        padding: 4px;
+        background-color: #F5F5F5;
+        border: 1px solid #BDBDBD;
+        border-radius: 3px;
+        font-size: 8pt;
+    }
+
+    /* Dark Theme Status Labels */
+    .dark QLabel[objectName*="status_"] {
+        padding: 4px;
+        background-color: #424242;
+        border: 1px solid #616161;
+        border-radius: 3px;
+        font-size: 8pt;
+        color: white;
+    }
+   </string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>8</number>
+   </property>
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_theme">
+     <item>
+      <widget class="QLabel" name="label_theme">
+       <property name="text">
+        <string>主题：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="themeSelector">
+       <property name="minimumWidth">
+        <number>120</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>浅色主题</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>深色主题</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_ai_chat">
+      <attribute name="title">
+       <string>AI对话</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <property name="margin" stdset="0">
+        <number>8</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="inputLayout">
+         <item>
+          <widget class="QLabel" name="label_name">
+           <property name="text">
+            <string>用户名称：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="edit_name"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_start">
+           <property name="text">
+            <string>启动</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_ai_log">
+         <property name="title">
+          <string>运行日志</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_ai_log">
+          <item>
+           <widget class="QTextEdit" name="text_area">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>AI对话日志将在此显示...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="status_ai">
+         <property name="text">
+          <string>就绪</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_mass_msg">
+      <attribute name="title">
+       <string>群发消息</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>8</number>
+       </property>
+       <property name="margin" stdset="0">
+        <number>8</number>
+       </property>
+       <item>
+        <widget class="QGroupBox" name="groupBox_contacts">
+         <property name="title">
+          <string>联系人列表</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_contacts">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="margin" stdset="0">
+           <number>6</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_add">
+            <item>
+             <widget class="QLineEdit" name="edit_contact">
+              <property name="placeholderText">
+               <string>请输入联系人</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_add_contact">
+              <property name="text">
+               <string>添加</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_remove_contact">
+              <property name="styleSheet">
+               <string>
+                background-color: #f44336;
+               </string>
+              </property>
+              <property name="text">
+               <string>删除</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_clear_contacts">
+              <property name="styleSheet">
+               <string>
+                background-color: #757575;
+               </string>
+              </property>
+              <property name="text">
+               <string>清空</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QListWidget" name="list_contacts">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::ExtendedSelection</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_message">
+         <property name="title">
+          <string>消息内容</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_message">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="margin" stdset="0">
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="message_content">
+            <property name="placeholderText">
+             <string>请输入群发消息</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_send_mass">
+            <property name="text">
+             <string>开始发送</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_mass_log">
+         <property name="title">
+          <string>运行日志</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_mass_log">
+          <item>
+           <widget class="QProgressBar" name="progress_bar"/>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="mass_log_area">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>群发消息日志将在此显示...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="status_mass">
+         <property name="text">
+          <string>就绪</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_auto_reply">
+      <attribute name="title">
+       <string>定时回复</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QGroupBox" name="groupBox_reply_settings">
+         <property name="title">
+          <string>回复设置</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_contact">
+            <property name="text">
+             <string>联系人：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="auto_reply_contact">
+            <property name="placeholderText">
+             <string>请输入要自动回复的联系人</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_time">
+            <property name="text">
+             <string>时间段：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout" name="timeLayout">
+            <item>
+             <widget class="QTimeEdit" name="time_start"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_to">
+              <property name="text">
+               <string>至</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTimeEdit" name="time_end"/>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_repeat">
+            <property name="text">
+             <string>回复次数：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_repeat">
+            <item>
+             <widget class="QSpinBox" name="spinBox_reply_count">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>999999</number>
+              </property>
+              <property name="value">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="checkBox_infinite_reply">
+              <property name="text">
+               <string>无限次数</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_interval">
+            <property name="text">
+             <string>回复间隔(秒)：</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSpinBox" name="spinBox_reply_interval">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>3600</number>
+            </property>
+            <property name="value">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_reply_content">
+         <property name="title">
+          <string>回复内容</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_content">
+          <item>
+           <widget class="QTextEdit" name="auto_reply_content">
+            <property name="placeholderText">
+             <string>请输入自动回复内容</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_auto_reply">
+            <property name="text">
+             <string>启动定时回复</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_reply_log">
+         <property name="title">
+          <string>运行日志</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_log">
+          <item>
+           <widget class="QTextEdit" name="auto_reply_log">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>自动回复日志将在此显示...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="status_reply">
+         <property name="text">
+          <string>就绪</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_backup">
+      <attribute name="title">
+       <string>聊天备份</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <layout class="QHBoxLayout" name="backupLayout">
+         <item>
+          <widget class="QLineEdit" name="backup_contact">
+           <property name="placeholderText">
+            <string>请输入要备份的联系人</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_select_path">
+           <property name="text">
+            <string>选择保存路径</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_backup">
+           <property name="text">
+            <string>开始备份</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_backup_log">
+         <property name="title">
+          <string>运行日志</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_backup_log">
+          <item>
+           <widget class="QProgressBar" name="backup_progress"/>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="backup_log">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>备份日志将在此显示...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_monitor">
+      <attribute name="title">
+       <string>关键词监控</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <property name="spacing">
+        <number>4</number>
+       </property>
+       <property name="margin" stdset="0">
+        <number>6</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_monitor">
+         <item>
+          <widget class="QLineEdit" name="monitor_contact">
+           <property name="placeholderText">
+            <string>请输入要监控的联系人</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_monitor">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>50</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>开始监控</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="keywords_list">
+         <property name="placeholderText">
+          <string>请输入关键词，每行一个</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_monitor_log">
+         <property name="title">
+          <string>运行日志</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_monitor_log">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <property name="margin" stdset="0">
+           <number>4</number>
+          </property>
+          <item>
+           <widget class="QTextEdit" name="monitor_log">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>监控日志将在此显示...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="status_monitor">
+         <property name="text">
+          <string>就绪</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_analytics">
+      <attribute name="title">
+       <string>数据统计</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <layout class="QHBoxLayout" name="analyticsLayout">
+         <item>
+          <widget class="QLineEdit" name="analytics_contact">
+           <property name="placeholderText">
+            <string>请输入要分析的联系人</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_analyze">
+           <property name="text">
+            <string>开始分析</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_analytics_log">
+         <property name="title">
+          <string>分析结果</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_analytics_log">
+          <item>
+           <widget class="QTextEdit" name="analytics_result">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+            <property name="placeholderText">
+             <string>分析结果将在此显示...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

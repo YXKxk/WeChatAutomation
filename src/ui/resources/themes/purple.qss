@@ -1,0 +1,43 @@
+/* 紫色主题 */
+QWidget {
+    background-color: #f3e5f5;
+    color: #6a1b9a;
+}
+
+QPushButton {
+    background-color: #9c27b0;
+    border: 1px solid #7b1fa2;
+    border-radius: 4px;
+    padding: 5px 15px;
+    color: #ffffff;
+}
+
+QPushButton:hover {
+    background-color: #7b1fa2;
+}
+
+QPushButton:pressed {
+    background-color: #6a1b9a;
+}
+
+QLineEdit, QTextEdit {
+    background-color: #ffffff;
+    border: 1px solid #ce93d8;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+QTabWidget::pane {
+    border: 1px solid #ce93d8;
+    background-color: #ffffff;
+}
+
+QTabBar::tab {
+    background-color: #f3e5f5;
+    border: 1px solid #ce93d8;
+    padding: 5px 10px;
+}
+
+QTabBar::tab:selected {
+    background-color: #ffffff;
+}

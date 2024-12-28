@@ -1,0 +1,67 @@
+/* 高对比度主题 */
+QWidget {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+QPushButton {
+    background-color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    padding: 5px 15px;
+    color: #000000;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+QPushButton:pressed {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+QLineEdit, QTextEdit {
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    padding: 4px;
+    color: #ffffff;
+}
+
+QTabWidget::pane {
+    border: 2px solid #ffffff;
+    background-color: #000000;
+}
+
+QTabBar::tab {
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    padding: 5px 10px;
+    color: #ffffff;
+}
+
+QTabBar::tab:selected {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+QComboBox {
+    background-color: #000000;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
+    padding: 4px;
+    color: #ffffff;
+}
+
+QComboBox::drop-down {
+    border: none;
+}
+
+QComboBox::down-arrow {
+    background-color: #ffffff;
+    width: 12px;
+    height: 12px;
+}

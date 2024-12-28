@@ -1,0 +1,29 @@
+/* 浅色主题 */
+.light {
+    background-color: #f0f0f0;
+    color: #000000;
+}
+
+/* 深色主题 */
+.dark {
+    background-color: #353535;
+    color: #ffffff;
+}
+
+/* 蓝色主题 */
+.blue {
+    background-color: #e6f0fa;
+    color: #000000;
+}
+
+/* 按钮样式 */
+QPushButton {
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+/* 输入框样式 */
+QLineEdit, QTextEdit {
+    padding: 3px;
+    border-radius: 2px;
+}

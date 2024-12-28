@@ -1,0 +1,1 @@
+CreateObject("WScript.Shell").Run "cmd /c cd /d " & CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScript.ScriptFullName) & " && ..\python\python.exe main.py", 0, False
