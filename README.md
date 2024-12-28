@@ -5,7 +5,6 @@
 一个基于 PyQt5 和 uiautomation 的微信自动化助手，提供图形界面操作，帮助用户自动化处理微信相关任务。
 
 #### 软件架构
-
 WeChatAutomation/
 ├── src/ # 源代码目录
 │ ├── core/ # 核心功能模块
@@ -28,7 +27,6 @@ WeChatAutomation/
 │ ├── config/ # 配置文件
 │ │ └── settings.py # 全局配置
 │ └── main.py # 程序入口
-
 #### 功能特点
 
 1. AI对话功能
