@@ -5,9 +5,10 @@
 import logging
 import os
 
-from PyQt5.QtCore import QTime
-from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox, QLabel, QTextEdit, QLineEdit, QPushButton, QComboBox
+from PyQt5.QtCore import QTime, QUrl
+from PyQt5.QtWidgets import QWidget, QFileDialog, QMessageBox, QLabel, QTextEdit, QLineEdit, QPushButton, QComboBox, QTabWidget
 from PyQt5.uic import loadUi
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 
 from src.config.settings import (
     UI_FILE_PATH,
@@ -27,6 +28,7 @@ class ChatAutomationApp(QWidget):
     def __init__(self):
         super().__init__()
         self.init_ui()
+        self.setup_audio()
         self.threads = {
             'auto_reply': None,
             'mass_sender': None,
@@ -45,15 +47,18 @@ class ChatAutomationApp(QWidget):
         try:
             loadUi(UI_FILE_PATH, self)
 
-            # 立即验证主题选择器
+            # 立即验证主题选择器和标签页控件
             self.themeSelector = self.findChild(QComboBox, "themeSelector")
+            self.tabWidget = self.findChild(QTabWidget, "tabWidget")
+
             if not self.themeSelector:
                 logging.error("找不到主题选择器控件")
                 raise ValueError("找不到主题选择器控件")
-            logging.info("成功找到主题选择器")
+            if not self.tabWidget:
+                logging.error("找不到Tab控件")
+                raise ValueError("找不到Tab控件")
 
-            # 直接在这里连接信号
-            self.themeSelector.currentIndexChanged.connect(self.on_theme_changed)
+            logging.info("成功找到主题选择器和Tab控件")
 
             self.setup_default_values()
 
@@ -113,30 +118,58 @@ class ChatAutomationApp(QWidget):
         self.progress_bar.setValue(0)
         self.backup_progress.setValue(0)
 
+    def setup_audio(self):
+        """初始化音效"""
+        self.click_sound = QMediaPlayer()
+        sound_file = os.path.join(os.path.dirname(__file__), 'resources', 'audio', 'click.mp3')
+        self.click_sound.setMedia(QMediaContent(QUrl.fromLocalFile(sound_file)))
+        self.click_sound.setVolume(50)  # 设置音量（0-100）
+
+    def play_click_sound(self):
+        """播放按键音效"""
+        self.click_sound.stop()  # 停止当前播放
+        self.click_sound.play()  # 播放音效
+
     def connect_signals(self):
         """连接信号槽"""
+        # 添加标签页切换音效
+        self.tabWidget.currentChanged.connect(self.play_click_sound)
+
         # AI对话标签页
+        self.btn_start.clicked.connect(self.play_click_sound)
         self.btn_start.clicked.connect(self.toggle_ai_chat)
 
+        # 主题切换
+        self.themeSelector.currentIndexChanged.connect(self.on_theme_changed)
+
         # 群发消息标签页
+        self.btn_send_mass.clicked.connect(self.play_click_sound)
         self.btn_send_mass.clicked.connect(self.start_mass_message)
 
         # 定时回复标签页
+        self.btn_auto_reply.clicked.connect(self.play_click_sound)
         self.btn_auto_reply.clicked.connect(self.toggle_auto_reply)
 
         # 聊天备份标签页
+        self.btn_select_path.clicked.connect(self.play_click_sound)
         self.btn_select_path.clicked.connect(self.select_backup_path)
+        self.btn_backup.clicked.connect(self.play_click_sound)
         self.btn_backup.clicked.connect(self.start_backup)
 
         # 关键词监控标签页
+        self.btn_monitor.clicked.connect(self.play_click_sound)
         self.btn_monitor.clicked.connect(self.toggle_monitor)
 
         # 数据统计标签页
+        self.btn_analyze.clicked.connect(self.play_click_sound)
         self.btn_analyze.clicked.connect(self.start_analytics)
 
         # 群发消息相关信号
+        self.btn_add_contact.clicked.connect(self.play_click_sound)
         self.btn_add_contact.clicked.connect(self.add_contact)
+        self.btn_remove_contact.clicked.connect(self.play_click_sound)
         self.btn_remove_contact.clicked.connect(self.remove_selected_contacts)
+        self.btn_clear_contacts.clicked.connect(self.play_click_sound)
         self.btn_clear_contacts.clicked.connect(self.clear_contacts)
         self.edit_contact.returnPressed.connect(self.add_contact)  # 支持回车添加
 
@@ -207,7 +240,7 @@ class ChatAutomationApp(QWidget):
         self.message_content.setEnabled(enabled)
 
     def on_checkbox_infinite_changed(self, state):
-        """处理无限次数复选��状态改变"""
+        """处理无限次数复选框状态改变"""
         self.spinBox_repeat.setEnabled(not state)
 
     @handle_ui_exception
@@ -342,7 +375,7 @@ class ChatAutomationApp(QWidget):
             self.threads['analytics'].stop()
             self.btn_analyze.setText("开始统计")
             self.enable_analytics_inputs(True)
-            self.status_analytics.setText("��据统计已停止")
+            self.status_analytics.setText("数据统计已停止")
             self.threads['analytics'].wait()
             self.threads['analytics'] = None
             return
@@ -405,7 +438,7 @@ class ChatAutomationApp(QWidget):
                 self.analytics_log.append("\n活跃度统计:")
                 activity = data['activity']
                 self.analytics_log.append(f"总消息数: {activity['total_messages']}")
-                self.analytics_log.append(f"平均长��: {activity['avg_length']:.2f}")
+                self.analytics_log.append(f"平均长度: {activity['avg_length']:.2f}")
                 self.analytics_log.append(f"最长消息: {activity['max_length']}")
 
             # 时间戳
